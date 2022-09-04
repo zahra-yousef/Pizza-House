@@ -1,0 +1,35 @@
+<?php
+
+use App\Http\Controllers\PizzaController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/pizzas', [PizzaController::class, 'index']);
+
+Route::get('/pizzas/{id}', [PizzaController::class, 'show']);
+
+//get data from db 
+    // $pizza = [
+    //     'type' => 'hawaiian', 
+    //     'base' => 'garlic',
+    //     'price' => 10
+    // ];
+    // return view('pizzas', $pizza);
+
+    // return view('pizzas', ['type' => 'hawaiian', 'base' => 'cheesy crust']);
+    // return 'pizzas';
+    // return['name' => 'veg pizzas', 'base' => 'classic'];
