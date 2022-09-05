@@ -7,6 +7,10 @@ use App\Models\Pizza;
 
 class PizzaController extends Controller
 {
+    //this method used to protected all routs 
+    // public function _construct(){
+    //     $this->middleware('auth');
+    // }
     public function index(){
         // get data from a database - SELECT QUERY
         // $pizzas = Pizza::all();
@@ -32,14 +36,20 @@ class PizzaController extends Controller
 
     public function store(){
         $pizza = new Pizza();
+        //get data from the form and assign it to each property
         $pizza->name = request('name');
         $pizza->type = request('type');
         $pizza->base = request('base');
+        $pizza->toppings = request('toppings');
 
         $pizza->save(); //INSERT INTO pizzas VALUES('name','type','base');
-
-        //error_log($pizza);
         
         return redirect('/')->with('msg','Thanks for your order');
+    }
+
+    public function destroy($id){
+        $pizza = Pizza::findOrFail($id);
+        $pizza->delete();
+        return redirect('/pizzas');
     }
 }
